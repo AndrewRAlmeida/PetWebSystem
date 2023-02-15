@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: 'Xs#2h7o17'
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: rebedrew
+      MYSQL_PASSWORD: 'Xs#2h7o17'
+    ports:
+      - '3306:3306'
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mariadb
