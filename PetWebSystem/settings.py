@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'PetWebSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb_new',
-        'USER': 'rebedrew',
-        'PASSWORD': 'e#sJ0GG3u0',
-        'HOST': 'rebedrew.com.br',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': 3306,
     }
 }
