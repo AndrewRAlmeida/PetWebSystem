@@ -1,4 +1,5 @@
-from .forms import NewUserForm
+from django.contrib.auth.backends import ModelBackend
+from .forms import NewUserForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,11 +13,14 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from django.contrib.auth import get_user_model
 
 
 def register_request(request):
+	print(request.POST)
 	if request.user.is_authenticated:
 		return redirect('portal:inicio')
+	print(request.POST)
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
@@ -32,21 +36,22 @@ def register_request(request):
 def login_request(request):
 	if request.user.is_authenticated:
 		return redirect('portal:inicio')
+	form = LoginForm()
 	if request.method == "POST":
-		form = AuthenticationForm(request, data=request.POST)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			password = form.cleaned_data.get('password')
-			user = authenticate(username=username, password=password)
-			if user is not None:
-				login(request, user)
-				messages.info(request, f"Você fez login como {username}.")
-				return redirect("portal:inicio")
-			else:
-				messages.error(request, "Senha ou usuário errados.")
+		print(request.POST)
+		# if form.is_valid():
+		email = request.POST.get('email')
+		password = request.POST.get('password')
+		user = authenticate(email=email, password=password)
+		if user is not None:
+			login(request, user)
+			messages.info(request, f"Você fez login como {email}.")
+			return redirect("portal:inicio")
 		else:
 			messages.error(request, "Senha ou usuário errados.")
-	form = AuthenticationForm()
+			form = LoginForm(request.POST)
+		# else:
+		# messages.error(request, "Senha ou usuário errados.")
 	return render(request=request, template_name="users/login.html", context={"login_form":form})
 
 
@@ -84,3 +89,17 @@ def password_reset_request(request):
 			messages.error(request, 'E-mail inválido!')
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="users/password_reset.html", context={"password_reset_form": password_reset_form})
+
+UserModel = get_user_model()
+class EmailBackend(ModelBackend):
+	def authenticate(self, request, email=None, password=None, **kwargs):
+		try:
+			user = UserModel.objects.get(Q(email__iexact=email) | Q(email__iexact=email))
+		except UserModel.DoesNotExist:
+			UserModel().set_password(password)
+			return
+		except UserModel.MultipleObjectsReturned:
+			user = UserModel.objects.get(Q(email__iexact=email) | Q(email__iexact=email)).order_by('id').first()
+
+		if user.check_password(password) and self.user_can_authenticate(user):
+			return user

@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'PetWebSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
+        'NAME': 'mydb_new',
         'USER': 'rebedrew',
-        'PASSWORD': 'Xs#2h7o17',
+        'PASSWORD': 'e#sJ0GG3u0',
         'HOST': 'rebedrew.com.br',
         'PORT': 3306,
     }
@@ -136,10 +136,14 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+AUTH_USER_MODEL = 'users.Usuario'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# AUTHENTICATION_BACKENDS = ['users.views.EmailBackend']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
