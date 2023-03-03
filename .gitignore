@@ -2,4 +2,4 @@
 bin
 lib
 .idea
-settings.py
+PetWebSystem/settings.py
