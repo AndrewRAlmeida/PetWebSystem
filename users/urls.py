@@ -3,6 +3,9 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path("minhaconta/", views.minhaconta, name="minhaconta"),
+    path("minhaconta/solicitacoes", views.solicitacoes, name="solicitacoes"),
+    path("minhaconta/alterar_cadastro", views.alterarcadastro, name="alterarcadastro"),
     path("register/", views.register_request, name="register"),
     path("login/", views.login_request, name="login"),
     path("logout/", views.logout_request, name="logout"),

@@ -1,0 +1,384 @@
+:root {
+    --amarelo: #ffcb00;
+    --roxo: #451b8b;
+}
+.logo svg{
+    max-height: 130px;
+    transition: max-height 0.5s ease-in;
+}
+.header.scrolled .logo svg{
+    max-height: 79px;
+}
+.home .owl-carousel .owl-nav {
+    position: absolute;
+    bottom: 50%;
+}
+.home .owl-carousel .owl-nav button span i {
+    font-size: 40px;
+    color: #fff;
+}
+.home .owl-theme .owl-nav [class*="owl-"]:hover {
+    background: unset;
+}
+.home .owl-theme .owl-nav [class*="owl-"] {
+    margin: 15px;
+}
+.home .owl-carousel .owl-dots {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+}
+.home .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #fff;
+}
+.home .owl-theme .owl-dots .owl-dot span {
+    background: var(--roxo);
+    border: 1px solid #fff;
+}
+footer p {
+    color: #fff;
+    font-size: 14px;
+}
+footer p i {
+    background-color: #fff;
+    padding: 3px 4px;
+    border-radius: 20px;
+    color: var(--roxo);
+}
+@keyframes pisca {
+  0% {
+      fill: #fff;
+  }
+    50% {
+      fill: var(--amarelo);
+  }
+    100% {
+      fill: #fff;
+  }
+}
+#path2818, #path2820, #path2824, #path2826, #path2837 {
+    fill: var(--amarelo);
+    animation-name: pisca;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+.logo img {
+    max-height: 80px;
+}
+@media screen and (max-width: 575px){
+    .logo svg{
+        max-height: 70px;
+    }
+    .header.scrolled .logo svg{
+        max-height: 60px;
+    }
+    footer p {
+        color: #fff;
+        font-size: 11px;
+    }
+}
+footer .main_nav ul li a {
+    color: var(--roxo);
+}
+.restaurantes, .vagas {
+    background: rgb(225,220,206);
+    background: linear-gradient(180deg, rgba(225,220,206,1) 0%, rgba(255,255,255,1) 50%, rgba(225,220,206,1) 100%);
+}
+img.shadow-laranja {
+    box-shadow: -15px -15px var(--amarelo);
+    /*transition: all .5s ease-in;*/
+}
+@keyframes bounce1 {
+  0%   {
+    box-shadow: -15px -15px var(--amarelo);
+  }
+  50%  {
+    box-shadow: 0px 0px var(--amarelo);
+  }
+  100% {
+    box-shadow: 15px 15px var(--amarelo);
+  }
+}
+@keyframes bounce2 {
+  0%   {
+    box-shadow: -15px -15px var(--roxo);
+  }
+  50%  {
+    box-shadow: 0px 0px var(--roxo);
+  }
+  100% {
+    box-shadow: 15px 15px var(--roxo);
+  }
+}
+@keyframes bounce3 {
+  0%   {
+    box-shadow: -15px -15px #000;
+  }
+  50%  {
+    box-shadow: 0px 0px #000;
+  }
+  100% {
+    box-shadow: 15px 15px #000;
+  }
+}
+img.shadow-laranja:hover {
+    /*box-shadow: 15px 15px var(--amarelo);*/
+    animation: bounce1 infinite 2s ease-in-out alternate;
+}
+.restaurantes .lolla p {
+    color: var(--amarelo);
+}
+.restaurantes .res p:first-of-type {
+    font-family: 'Century Gothic Bold', 'sans-serif';
+}
+img.shadow-marrom {
+    box-shadow: -15px -15px var(--roxo);
+    transition: all .5s ease-in;
+}
+img.shadow-marrom:hover {
+    /*box-shadow: 15px 15px var(--roxo);*/
+    animation: bounce2 infinite 2s ease-in-out alternate;
+}
+.restaurantes .osteria p {
+    color: var(--roxo);
+}
+.restaurantes .osteria p:last-of-type {
+    color: #1d361d;
+}
+img.shadow-preta {
+    box-shadow: -15px -15px #000;
+    transition: all .5s ease-in;
+}
+img.shadow-preta:hover {
+    /*box-shadow: 15px 15px #000;*/
+    animation: bounce3 infinite 2s ease-in-out alternate;
+}
+.restaurantes .sarjeta p {
+    color: #000;
+}
+h1.title {
+  font-family: 'Century Gothic Bold', 'sans-serif';
+  color: var(--amarelo);
+  letter-spacing: 5px;
+  font-size: 25px;
+}
+.sobre-nos p {
+    color: var(--roxo);
+    line-height: 18px;
+}
+.sobre-nos .text {
+    height: fit-content;
+}
+header {
+    background-image: linear-gradient(to bottom, rgb(69, 27, 139), #451b8b00);
+}
+.grupo .sig.inverso {
+    padding-top: 100px;
+}
+.pagination a {
+    color: var(--roxo);
+}
+.owl-carousel img.banner_logo {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 150px;
+}
+.testimonials {
+  width: 100%;
+  padding-top: 106px;
+  padding-bottom: 115px;
+}
+.reservations {
+    background-image: url("../images/contato_bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.reservations .bg{
+    background-color: #000000b0;
+    padding-top: 101px;
+    padding-bottom: 75px;
+}
+.contato p a:hover {
+    color: var(--amarelo);
+}
+@media screen and (min-width: 768px ){
+    footer p {
+        font-size: 13px;
+    }
+    .banner-lolla {
+        margin-top: -140px;
+    }
+    .sobre-nos .text {
+        background-color: #fff;
+        padding-bottom: 10px;
+    }
+    .grupo .sig.inverso {
+        padding-top: 170px;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    /*.logo svg{*/
+    /*    max-height: 60px;*/
+    /*}*/
+    .header.scrolled .logo svg{
+        max-height: 50px;
+    }
+    .main_nav ul li:not(:last-child) {
+      margin-right: 20px;
+    }
+    .main_nav ul li a {
+        font-size: 11px;
+    }
+
+}
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+#sidebar {
+  /*margin-top: -83px;*/
+  /* transition: margin 0.1s ease-in 0.1s; */
+}
+
+@media screen and (max-width: 768px) {
+  #sidebar {
+    /*margin-top: -57px;*/
+  }
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+@media (max-width: 768px) {
+  #sidebar {
+      margin-left: 0px;
+  }
+  #sidebar.active {
+      margin-left: -250px;
+  }
+}
+
+#sidebar {
+  background: var(--roxo);
+  color: #fff;
+  transition: all 0.3s;
+  position: absolute;
+  z-index: 9999;
+    top: 0px;
+}
+#sidebar .sidebar-header {
+  padding: 16px;
+  background: var(--roxo);
+  border-bottom: 1px solid #9f00fa;
+}
+#sidebar .sidebar-header h3 {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+  color: #fff;
+  background: #6d7fcc;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+::-webkit-input-placeholder {
+        /* WebKit browsers */
+         color: transparent!important;
+    }
+     :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+         color: transparent!important;
+    }
+     ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+         color: transparent!important;
+    }
+     :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+         color: transparent!important;
+    }
+     input::placeholder {
+         color: transparent!important;
+    }
+     textarea::-webkit-input-placeholder {
+        /* WebKit browsers */
+         color: transparent!important;
+    }
+     textarea:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+         color: transparent!important;
+    }
+     textarea::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+         color: transparent!important;
+    }
+     textarea:-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+         color: transparent!important;
+    }
+     textarea::placeholder {
+         color: transparent!important;
+    }
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+.mt-100 {
+    margin-top: 100px;
+}
+.botao_filtro {
+    transition: margin 0.3s ease-in;
+}
+.botao_filtro.active {
+    margin-left: 250px;
+}
+.pet_info p {
+    margin-bottom: 0px;
+    color: var(--roxo);
+}
+.bg-roxo {
+    background-color: var(--roxo);
+}
+#hint_id_password1 {
+    color: #fff;
+}

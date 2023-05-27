@@ -1,5 +1,8 @@
 from django.contrib.auth.backends import ModelBackend
-from .forms import NewUserForm, LoginForm
+from django.contrib.auth.decorators import login_required
+
+from pets.models import Adocoes
+from .forms import NewUserForm, LoginForm, MinhaContaForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -15,12 +18,12 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.contrib.auth import get_user_model
 
+from .models import Usuario
+
 
 def register_request(request):
-	print(request.POST)
 	if request.user.is_authenticated:
 		return redirect('portal:inicio')
-	print(request.POST)
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
@@ -35,23 +38,19 @@ def register_request(request):
 
 def login_request(request):
 	if request.user.is_authenticated:
-		return redirect('portal:inicio')
+		return redirect('minhaconta')
 	form = LoginForm()
 	if request.method == "POST":
-		print(request.POST)
-		# if form.is_valid():
 		email = request.POST.get('email')
 		password = request.POST.get('password')
 		user = authenticate(email=email, password=password)
 		if user is not None:
 			login(request, user)
 			messages.info(request, f"Você fez login como {email}.")
-			return redirect("portal:inicio")
+			return redirect("minhaconta")
 		else:
 			messages.error(request, "Senha ou usuário errados.")
 			form = LoginForm(request.POST)
-		# else:
-		# messages.error(request, "Senha ou usuário errados.")
 	return render(request=request, template_name="users/login.html", context={"login_form":form})
 
 
@@ -66,7 +65,7 @@ def password_reset_request(request):
 		password_reset_form = PasswordResetForm(request.POST)
 		if password_reset_form.is_valid():
 			data = password_reset_form.cleaned_data['email']
-			associated_users = User.objects.filter(Q(email=data))
+			associated_users = Usuario.objects.filter(Q(email=data))
 			if associated_users.exists():
 				for user in associated_users:
 					subject = "Resete de senha"
@@ -85,7 +84,7 @@ def password_reset_request(request):
 						send_mail(subject, email, 'admin@example.com', [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
-					return redirect ("/users/password_reset/done/")
+					return redirect("/users/password_reset/done/")
 			messages.error(request, 'E-mail inválido!')
 	password_reset_form = PasswordResetForm()
 	return render(request=request, template_name="users/password_reset.html", context={"password_reset_form": password_reset_form})
@@ -103,3 +102,26 @@ class EmailBackend(ModelBackend):
 
 		if user.check_password(password) and self.user_can_authenticate(user):
 			return user
+
+@login_required
+def minhaconta(request):
+	return render(request, 'minhaconta.html', locals())
+
+@login_required
+def alterarcadastro(request):
+	cliente = Usuario.objects.get(id=request.user.id)
+
+	if request.method == 'POST':
+		form = MinhaContaForm(request.POST, instance=cliente)
+		if form.is_valid():
+			form.save()
+	else:
+		form = MinhaContaForm(instance=cliente)
+	return render(request, 'alterar_cadastro.html', locals())
+
+
+@login_required
+def solicitacoes(request):
+	adocoes = Adocoes.objects.filter(usuario=request.user).all()
+	print(adocoes)
+	return render(request, 'solicitacoes.html', locals())

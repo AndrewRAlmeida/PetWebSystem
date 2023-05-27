@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+{% load pets_tags %}
+
+{% block content %}
+    <div class="super_container">
+
+        {% include 'includes/header.html' %}
+        {% get_banner 'banner-noticias' '1600' %}
+        <div class="">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h1 class="title text-uppercase text-center">Notícias</h1>
+                    </div>
+
+                    {% if noticias %}
+                        {% for noticia in noticias %}
+                        <div class="col-6 col-md-3 mb-3 pet_destaque">
+                            <div class="card">
+                                <img src="{{ noticia.imagem.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ noticia.titulo }}</h5>
+                                    <p class="card-text"></p>
+                                    <a href="{% url 'noticia' noticia.id %}" class="btn btn-warning text-white mt-3">Saiba
+                                        mais</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="col-12 text-center d-flex mt-4">
+                        <ul class="pagination mx-auto">
+                            {% if noticias.has_previous %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?{% subs_url page=noticias.previous_page_number %}"><i
+                                        class="fa fa-caret-left"></i></a></li>
+                            {% endif %}
+                            {% if noticias.paginator.num_pages > 1 %}
+                                {% for i in noticias.paginator.page_range %}
+                                    {% if i <= noticias.number|add:5 and i >= noticias.number|add:-5 %}
+                                        <li class="page-item">
+                                            <a href="?{% subs_url page=i %}"
+                                                    {% if noticias.number == i %} data-selected="true"
+                                               class="selected page-link" {% else %} class="page-link "{% endif %}>
+                                                {{ i }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if noticias.has_next %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?{% subs_url page=noticias.next_page_number %}"><i
+                                        class="fa fa-caret-right"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% else %}
+                        <div class="mt-5 text-center">
+                        <h3>Nenhuma notícia encontra!</h3>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        $('.botao_filtro').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $('.botao_filtro').toggleClass('active');
+            $('.botao_filtro i').toggleClass('fa-sliders fa-times');
+        });
+    </script>
+{% endblock %}

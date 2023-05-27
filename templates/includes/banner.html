@@ -1,0 +1,21 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="home">
+    <div class="owl-carousel owl-theme banner-home d-none d-md-block">
+        {% for im in ims %}
+            <div class="">
+                <img class="" src="{{ im.img.url }}" alt="">
+{#                <img src="{% static 'images/lolla_logo.png' %}" class="banner_logo">#}
+            </div>
+        {% endfor %}
+    </div>
+<div class="owl-carousel owl-theme banner-home d-block d-md-none">
+        {% for im in ims_m %}
+            <div class="">
+                <img class="" src="{{ im.img.url }}" alt="">
+{#                <img src="{% static 'images/lolla_logo.png' %}" class="banner_logo">#}
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+
+{% block content %}
+    <div class="super_container">
+
+        {% include 'includes/header.html' %}
+        {% get_banner 'banner-ong' '1600' %}
+
+        <div class="">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h2 class="text-center text-uppercase text-uppercase mt-5 fw-bold">Conheça a ONG</h2>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae sollicitudin augue.
+                            Donec viverra ut augue non convallis. Mauris facilisis, lacus vel egestas dapibus, arcu
+                            purus sodales leo, et lobortis lectus arcu eu augue. Praesent eget bibendum lacus. Fusce
+                            rutrum congue ipsum, sit amet euismod velit posuere nec. Curabitur venenatis, sem id
+                            suscipit sodales, nulla augue iaculis dolor, sed ornare dolor urna sit amet felis. Aliquam
+                            erat volutpat. Pellentesque pharetra finibus enim, eget sollicitudin nibh porta cursus.
+                            Suspendisse porttitor tincidunt purus a mattis. Sed euismod, ligula sit amet maximus
+                            ullamcorper, ex ante sodales ante, non feugiat erat odio sed risus. Maecenas tincidunt orci
+                            at sapien scelerisque ultricies.</p>
+
+                           <p> Donec hendrerit dictum aliquet. In blandit mollis tellus sed pulvinar. Nam erat massa,
+                            scelerisque vitae mi et, ornare imperdiet tortor. Proin non finibus lacus. Curabitur sit
+                            amet odio dolor. Donec lacinia iaculis erat vitae pharetra. Nullam pulvinar vestibulum
+                            ligula ac ultrices. Suspendisse tincidunt diam non quam interdum congue in ut eros. </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+
+    </script>
+{% endblock %}

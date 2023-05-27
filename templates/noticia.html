@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+
+{% block content %}
+    <div class="super_container">
+
+        {% include 'includes/header.html' %}
+        {% get_banner 'banner-noticias' '1600' %}
+        <div class="">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-4">
+                        <div class="owl-carousel owl-theme pet_carousel">
+                            <img src="{{ noticia.imagem.url }}" class="w-100 img-thumbnail rounded-3" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-4 pet_info d-table">
+                        <div class="w-100 d-table-row">
+                        <h2 class="fw-bold">{{ noticia.titulo }}</h2>
+                            <p>data de publicação: {{ noticia.data_cadastro }}</p>
+                        </div>
+                        <div class="d-table-row align-baseline">
+
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        {{ noticia.conteudo|safe }}
+                    </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+    $('.pet_carousel').owlCarousel({
+		items:1,
+		// lazyLoad:true,
+		loop:true,
+		nav:false,
+		margin:0,
+		autoHeight:true
+	});
+    </script>
+{% endblock %}

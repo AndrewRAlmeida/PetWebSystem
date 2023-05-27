@@ -6,3 +6,4 @@ PetWebSystem/settings.py
 /venv/
 pyvenv.cfg
 docker-compose.yml
+/theme.zip

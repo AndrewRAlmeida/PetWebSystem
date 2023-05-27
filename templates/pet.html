@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+
+{% block content %}
+    <div class="super_container mt-100">
+
+        {% include 'includes/header.html' %}
+
+        <div class="">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-4">
+                        <div class="owl-carousel owl-theme pet_carousel">
+                            {%  for img in pet.imagens  %}
+                            <img src="{{ img.imagem.url }}" class="w-100 img-thumbnail rounded-3" alt="...">
+                            {% endfor  %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-4 pet_info d-table">
+                        <div class="w-100 d-table-row">
+                        <h2 class="fw-bold">{{ pet.nome }}</h2>
+                        <p>Idade: {{ pet.idade }} anos</p>
+                        <p>Vacinado: {% if pet.vacinado %}sim{% else %}não{% endif %}</p>
+                        <p>Castrado: {% if pet.castrado %}sim{% else %}não{% endif %}</p>
+                        <p>Raça: {{ pet.raca }}</p>
+                        <p>Cor: {{ pet.cor }}</p>
+                        </div>
+                        <div class="d-table-row align-baseline">
+                    {% if not solicitacao %}
+                        <form action="{% url 'pet' pet.slug %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-warning">Solicitar adoção</button>
+                        </form>
+                    {% else %}
+                        <p class="text-uppercase text-center p-2 bg-warning rounded-2">Você já solicitou a adoção deste pet!</p>
+                    {% endif %}
+                        </div>
+                    </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+             {% endif %}
+                    <div class="col-12">
+                        {{ pet.descricao|safe }}
+                    </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+    $('.pet_carousel').owlCarousel({
+		items:1,
+		// lazyLoad:true,
+		loop:true,
+		nav:false,
+		margin:0,
+		autoHeight:true
+	});
+    </script>
+{% endblock %}

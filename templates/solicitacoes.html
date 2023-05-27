@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+
+{% block content %}
+    <div class="super_container mt-100">
+
+        {% include 'includes/header.html' %}
+
+        <div class="">
+            <div class="container py-5 mt-0 mt-sm-5">
+                <div class="row">
+                    {% include 'includes/menu_minhaconta.html' %}
+                    <div class="col-12 col-sm-9 d-flex flex-wrap">
+                        {% if adocoes %}
+                            {% for solicitacao in adocoes %}
+                                <div class="col-12 col-sm-6 mb-3 pet_destaque px-2">
+                                    <div class="card">
+
+                                        <img src="{{ solicitacao.pet.imagem.imagem.url }}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ solicitacao.pet.nome }}</h5>
+                                            <p>Data de solicitação: {{ solicitacao.data_cadastro }}</p>
+                                            <p class="card-text"></p>
+                                            <a href="{% url 'pet' solicitacao.pet.slug %}" class="btn btn-warning text-white mt-3">Saiba
+                                                mais</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+
+    </script>
+{% endblock %}

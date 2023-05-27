@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+{% load crispy_forms_tags %}
+{% load pets_tags %}
+
+{% block content %}
+    <div class="super_container mt-100 overflow-visible position-static">
+
+        {% include 'includes/header.html' %}
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header text-center">
+              <h3 class="text-white">Filtros</h3>
+            </div>
+            <form method="get" class="formPets px-1 mt-3" action="{% url 'pets' %}">
+              {{ f.form|crispy }}
+
+              <button type="submit" class="btn btn-primary bg-white text-uppercase fw-bold text-dark" style="">
+                Filtrar
+              </button>
+
+            </form>
+          </nav>
+    <div class="botao_filtro position-absolute top-50" style="z-index: 9999">
+        <button class="btn btn-warning">
+            <i class="fa fa-sliders"></i>
+        </button>
+    </div>
+        <div class="">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <h1 class="title text-uppercase text-center">Conheça nossos pets!</h1>
+                    </div>
+                    {% for pet in pets %}
+                        <div class="col-6 col-md-3 mb-3 pet_destaque">
+                        <div class="card">
+                          <img src="{{ pet.imagem.imagem.url }}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ pet.nome }}</h5>
+                            <p class="card-text"></p>
+                            <a href="{% url 'pet' pet.slug %}" class="btn btn-warning text-white mt-3">Saiba mais</a>
+                          </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                <div class="col-12 text-center d-flex mt-4">
+                    <ul class="pagination mx-auto">
+                        {% if pets.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?{% subs_url page=pets.previous_page_number %}"><i
+                                    class="fa fa-caret-left"></i></a></li>
+                        {% endif %}
+                        {% if pets.paginator.num_pages > 1 %}
+                            {% for i in pets.paginator.page_range %}
+                                {% if i <= pets.number|add:5 and i >= pets.number|add:-5 %}
+                                    <li class="page-item"><a class="page-link" href="?{% subs_url page=i %}"
+                                            {% if pets.number == i %} data-selected="true"
+                                                             class="selected" {% endif %}>{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if pets.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?{% subs_url page=pets.next_page_number %}"><i
+                                    class="fa fa-caret-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+    $('.botao_filtro').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $('.botao_filtro').toggleClass('active');
+        $('.botao_filtro i').toggleClass('fa-sliders fa-times');
+    });
+    </script>
+{% endblock %}

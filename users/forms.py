@@ -1,18 +1,16 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.urls import reverse_lazy
 
 from users.models import Usuario
-
-
-# Create your forms here.
 
 class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)
 
 	class Meta:
 		model = Usuario
-		fields = ("nome", "bairro", "email", "password1", "password2")
+		fields = ("nome", "email", "password1", "password2")
 
 	def save(self, commit=True):
 		user = super(NewUserForm, self).save(commit=False)
@@ -30,7 +28,22 @@ class LoginForm(forms.ModelForm):
 
 	def clean(self):
 		dados = self.cleaned_data
-		user = authenticate(username=dados['email'], password=dados['password'])
-		# if user is None:
-		# 	raise forms.ValidationError('Verifique os dados e tente novamente')
 		return dados
+
+class MinhaContaForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ('email', 'nome', 'cpf', 'telefone')
+
+    senha = forms.CharField(
+        label='Senha',
+        # help_text='<a href="{link}">(clique aqui para alterar a sua senha)</a>'.format(link=reverse_lazy('mudar_senha')),
+        widget=forms.PasswordInput(attrs={'readonly':'readonly'}),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(MinhaContaForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['email']:
+            self.fields[fieldname].help_text = None

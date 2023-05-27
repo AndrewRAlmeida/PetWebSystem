@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+{% block content %}
+    <div class="super_container">
+        {% include 'includes/header.html' %}
+        {% get_banner 'banner-contato' '1600' %}
+        <div class="">
+            <div class="container py-2">
+                <div class="row">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="mt-2 alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="contato">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col text-center">
+                            <div class="">
+                                <div class="section_title mb-4"><h1>Diga um oi!</h1></div>
+                                <div class="col-12 col-md-6 mx-auto">
+                                    <p>Dúvidas, sugestões ou informações!</p>
+                                    <p>Telefone: <a href="tel:00000000000">00000000000</a></p>
+                                    <p>Whatsapp: <a href="#">00000000000</a></p>
+                                    <p>E-mail: <a href="#">contato@contato.com.br</a></p>
+                                    <p>ou preencha o formulário abaixo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+                        <div class="d-flex flex-column align-items-center justify-content-center bg-roxo rounded-2 mb-4 py-4">
+                            <h2 class="res_title">Formulário de contato</h2>
+                            <div class="res_form_container">
+                                <form id="res_form" class="res_form" enctype="multipart/form-data" method="post">
+                                    <div class="row col-10 mx-auto px-3 px-md-0 d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                                        <div class="col-12">
+                                            <input id="" class="res_input form-control" type="text" name="nome"
+                                                   placeholder="Nome" required="">
+                                        </div>
+                                        <div class="col-12">
+                                            <input id="" class="res_input form-control" type="email" name="email"
+                                                   placeholder="E-mail" required="">
+                                        </div>
+                                        <div class="col-12">
+                                            <input id="" class="res_input form-control" type="text" name="telefone"
+                                                   placeholder="Telefone" required="">
+                                        </div>
+                                        <div class="col-12">
+                                                <textarea id="" class="res_textarea form-control" name="mensagem"
+                                                          placeholder="Mensagem"></textarea>
+                                        </div>
+                                        <div class="col-12 d-flex flex-wrap">
+                                            <button class="res_button mx-auto text-dark">Enviar</button>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Reservations -->
+
+
+    {% include 'includes/footer.html' %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+
+    </script>
+{% endblock %}

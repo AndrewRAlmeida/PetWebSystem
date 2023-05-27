@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load banner_tags %}
+
+{% block content %}
+    <div class="super_container mt-100">
+
+        {% include 'includes/header.html' %}
+
+        <div class="">
+            <div class="container py-5 mt-0 mt-sm-5">
+                <div class="row">
+                    {% include 'includes/menu_minhaconta.html' %}
+                    <div class="col-12 col-sm-9">
+                     <img class="w-100" src="https://img.freepik.com/fotos-gratis/personagem-de-desenho-animado-de-buldogue-mochileiro-divertido_183364-80988.jpg?w=900&t=st=1685142224~exp=1685142824~hmac=cbb9999a1da8f7f82041ebe4be5a93abb4eff7a30a16551dbf0e0390411ebd37"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script>
+
+    </script>
+{% endblock %}

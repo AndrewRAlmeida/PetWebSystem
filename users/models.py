@@ -1,11 +1,10 @@
-from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractUser
 
 
-
 class UserManager(BaseUserManager):
-    use_in_migraions = True
+    use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -32,12 +31,21 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-class Usuario(AbstractUser, PermissionsMixin):
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'
+
     username = None
 
     nome = models.CharField(max_length=60, null=True, db_index=True, blank=False)
-    bairro = models.CharField(max_length=60, null=True, blank=True)
+    cpf = models.CharField(max_length=11, null=True, blank=True)
+    telefone = models.CharField(max_length=60, null=False, blank=False, help_text="somente números")
     email = models.EmailField(unique=True, null=False)
+
+    is_active = models.BooleanField(default=True, verbose_name='ativo')
+    is_admin = models.BooleanField(default=False, verbose_name='admin')
 
     objects = UserManager()
 
@@ -46,6 +54,10 @@ class Usuario(AbstractUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.nome)
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
     def save(self, *args, **kwargs):
         super(Usuario, self).save(*args, **kwargs)
